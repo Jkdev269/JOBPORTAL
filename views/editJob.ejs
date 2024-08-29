@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPortal</title>
+   
+</head>
+<body>
+  <%- include('navbar') %>
+  <div class="container p-3 mx-auto my-5 rounded border border-success bg-them">
+    <h2 style="color: #181642" class="text-center mb-3">Update Job</h2>
+    <form action="/job/<%= job._id %>/update" method="post">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="jobCategory" class="form-label">Job Category</label>
+                <select id="jobCategory" required name="job_category" class="form-select">
+                    <option value="Tech" <%= job.job_category === 'Tech' ? 'selected' : '' %>>Tech</option>
+                    <option value="Non-Tech" <%= job.job_category === 'Non-Tech' ? 'selected' : '' %>>Non Tech</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="jobDesignation" class="form-label">Job Designation</label>
+                <select id="jobDesignation" required name="job_designation" class="form-select">
+                  <option value="HR" <%= job.job_designation === 'HR' ? 'selected' : '' %>>HR</option>
+                  <option value="SDE" <%= job.job_designation === 'SDE' ? 'selected' : '' %>>SDE</option>
+                  <option value="DevOps" <%= job.job_designation === 'DevOps' ? 'selected' : '' %>>DevOps</option>
+                  <option value="MERN Developer" <%= job.job_designation === 'MERN DevO' ? 'selected' : '' %>>MERN Developer</option>
+                  <option value="JAVA Developer" <%= job.job_designation === 'Java Developer' ? 'selected' : '' %>>JAVA Developer</option>
+                  <option value="Front-End Developer" <%= job.job_designation === 'Front-End Developer' ? 'selected' : '' %>>Front-End Developer</option>
+                  <option value="Back-End Developer" <%= job.job_designation === 'Back-End Developer' ? 'selected' : '' %>>Back-End Developer</option>
+                  <option value="Full-Stack Developer" <%= job.job_designation === 'Full-Stack Developer' ? 'selected' : '' %>>Full-Stack Developer</option>
+                  
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="jobLocation" class="form-label">Job Location</label>
+            <input type="text" name="job_location" class="form-control" id="jobLocation" value="<%= job.job_location %>" required />
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="companyName" class="form-label">Company Name</label>
+                <input type="text" name="company_name" class="form-control" id="companyName" value="<%= job.company_name %>" required />
+            </div>
+            <div class="col-md-3">
+                <label for="salary" class="form-label">Salary</label>
+                <input type="text" name="salary" class="form-control" id="salary" value="<%= job.salary %>" required />
+            </div>
+            <div class="col-md-3">
+                <label for="totalPositions" class="form-label">Total Positions</label>
+                <input type="number" name="number_of_openings" class="form-control" id="totalPositions" value="<%= job.number_of_openings %>" required />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="skillsRequired" class="form-label">Skills Required</label>
+            <select id="skillsRequired" required multiple name="skills_required" class="form-select">
+              <option name="React" value="React" <%= job.skills_required && job.skills_required.includes('React') ? 'selected' : '' %>>React</option>
+              <option name="NodeJs" value="NodeJs" <%= job.skills_required && job.skills_required.includes('NodeJs') ? 'selected' : '' %>>NodeJs</option>
+              <option name="Angular" value="Angular" <%= job.skills_required && job.skills_required.includes('Angular') ? 'selected' : '' %>>Angular</option>
+              <option name="MongoDB" value="MongoDB" <%= job.skills_required && job.skills_required.includes('MongoDB') ? 'selected' : '' %>>MongoDB</option>
+              <option name="SQL" value="SQL" <%= job.skills_required && job.skills_required.includes('SQL') ? 'selected' : '' %>>SQL</option>
+              <option name="Express value="Express" <%= job.skills_required && job.skills_required.includes('Express') ? 'selected' : '' %>>Express</option>
+              <option name="Java" value="Java" <%= job.skills_required && job.skills_required.includes('Java') ? 'selected' : '' %>>Java</option>
+              <option name="SpringBoot" value="SpringBoot" <%= job.skills_required && job.skills_required.includes('SpringBoot') ? 'selected' : '' %>>SpringBoot</option>
+              <option name="C++" value="C++" <%= job.skills_required && job.skills_required.includes('C++') ? 'selected' : '' %>>C++</option>
+              <option name="data Structures & Algo" value="Data Structures & Algo" <%= job.skills_required && job.skills_required.includes('Data Structures & Algo') ? 'selected' : '' %>>
+                Data Structures & Algo
+              </option>
+              
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="applyBy" class="form-label">Apply By</label>
+            <input type="date" name="apply_by" class="form-control" id="applyBy"
+                value="<%= job.apply_by ? job.apply_by.toISOString().split('T')[0] : '' %>" required />
+        </div>
+
+        <button type="submit" class="w-100 mb-3 mt-2 btn btn-md btn-success">Update</button>
+    </form>
+</div>
+   
+</body>
+</html>

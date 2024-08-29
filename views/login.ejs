@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPortal</title>
+
+    <style>
+    .form-box {
+      background-color: #f8f9fa; /* Light background for the form box */
+    }
+
+    .lbtn {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .form-box {
+        width: 100% !important; /* Full width on smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <%- include('navbar') %>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="p-3 mx-auto form-box my-5 rounded border border-light-subtle border-5 w-100" style="max-width: 500px;">
+      <h2 style="color: #181642;" class="text-center mb-3">Login</h2>
+      <form action="/login" method="post" class="p-3">
+        <div class="mb-3">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Email</span>
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" aria-label="email" aria-describedby="basic-addon1" required>
+          </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Password</span>
+            <input type="password" name="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="basic-addon1" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-md mt-2 lbtn btn-danger">Login</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

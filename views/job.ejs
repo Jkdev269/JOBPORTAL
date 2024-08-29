@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobPortal</title>
+
+  <style>
+    .margin-top{
+      margin-top: -48px;
+    }
+    .cardflex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .bg-them {
+      background-color:  #181642 !important;
+    }
+
+    .skill button {
+      margin: 5px 3px;
+    }
+
+    .card-header {
+      font-weight: bold;
+      font-size: 1.2rem;
+      background-color: #181642;
+    }
+
+    .card-title {
+      margin-bottom: 0.5rem;
+    }
+
+    .text-warning {
+      color: #ffc107;
+    }
+
+    .text-white {
+      color: #fff;
+    }
+
+    .text-info {
+      color: #17a2b8;
+    }
+
+    .btn-outline-info:hover, .btn-outline-success:hover {
+      color: white;
+      background-color: currentColor;
+    }
+
+    .card-body .card-title {
+      font-size: 1.1rem;
+      margin: 10px 0;
+    }
+
+    .skill {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <%- include('navbar') %>
+  <div class="min-vh-100 bg-them margin-top">
+    <div class="container mt-5">
+      
+      <!-- Static Job Listings -->
+      <!-- <div class="cardflex row mt-5">
+        <div class="card col-md-4 p-3 bg-them border-white">
+          <div class="card-header text-white">Actively hiring</div>
+          <div class="card-body">
+            <h5 class="card-title text-warning">Coding Ninjas</h5>
+            <span class="text-white">Tech</span>
+            <span class="text-info">SDE</span>
+            <h5 class="card-title text-white">Gurgaon HR IND Remote</h5>
+            <h5 class="card-title text-white">₹ 14-20lpa</h5>
+            <div class="skill p-1">
+              <button class="btn btn-sm btn-outline-info">REACT</button>
+              <button class="btn btn-sm btn-outline-info">NodeJs</button>
+              <button class="btn btn-sm btn-outline-info">JS</button>
+              <button class="btn btn-sm btn-outline-info">SQL</button>
+              <button class="btn btn-sm btn-outline-info">MongoDB</button>
+              <button class="btn btn-sm btn-outline-info">Express</button>
+              <button class="btn btn-sm btn-outline-info">AWS</button>
+            </div>
+            <a href="/job/1" class="btn btn-sm btn-outline-success my-2">View details</a>
+          </div>
+        </div>
+
+        <div class="card col-md-4 p-3 bg-them border-white">
+          <div class="card-header text-white">Actively hiring</div>
+          <div class="card-body">
+            <h5 class="card-title text-warning">Tech Giants</h5>
+            <span class="text-white">Tech</span>
+            <span class="text-info">Full-Stack Developer</span>
+            <h5 class="card-title text-white">Bangalore, India</h5>
+            <h5 class="card-title text-white">₹ 18-24lpa</h5>
+            <div class="skill p-1">
+              <button class="btn btn-sm btn-outline-info">Angular</button>
+              <button class="btn btn-sm btn-outline-info">NodeJs</button>
+              <button class="btn btn-sm btn-outline-info">MongoDB</button>
+              <button class="btn btn-sm btn-outline-info">AWS</button>
+              <button class="btn btn-sm btn-outline-info">REACT</button>
+            </div>
+            <a href="/job/2" class="btn btn-sm btn-outline-success my-2">View details</a>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Dynamic Job Listings -->
+      <div class="cardflex row mt-5">
+        <% jobs.forEach(function(job) { %>
+          <div class="card col-md-4 p-3 bg-them border-white">
+            <div class="card-header text-white">Actively hiring</div>
+            <div class="card-body">
+              <h5 class="card-title text-warning"><%= job.companyName %></h5>
+              <span class="text-white"><%= job.category %></span>
+              <span class="text-info"><%= job.designation %></span>
+              <h5 class="card-title text-white mt-3"><%= job.location %></h5>
+              <h5 class="card-title text-white">₹ <%= job.salary %></h5>
+              <div class="skill p-1">
+                <% job.skills.forEach(function(skill) { %>
+                  <button class="btn btn-sm btn-outline-info"><%= skill %></button>
+                <% }) %>
+              </div>
+              <a href="/job/<%= job._id %>" class="btn btn-sm btn-outline-success my-2">View details</a>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobPortal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .bg-them {
+        background-color: #181642 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('navbar') %>
+
+    <div class="container mt-5">
+      <div class="card p-4 bg-them border-danger">
+        <div class="card-header text-danger">
+          <h1><%= job.companyName %> is Hiring</h1>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title text-warning"><%= job.designation %></h3>
+          <h4 class="text-white">Category: <%= job.category %></h4>
+          <h4 class="text-white">Location: <%= job.location %></h4>
+          <h4 class="text-white">Salary: ₹ <%= job.salary %></h4>
+          <h4 class="text-white">Total Openings: <%= job.openings %></h4>
+
+          <div class="skill p-1 text-danger">
+            <h4>Skills Required</h4>
+            <% job.skills.forEach(function(skill) { %>
+            <button class="btn btn-sm btn-outline-info"><%= skill %></button>
+            <% }) %>
+          </div>
+          <h4 class="text-white">
+            Apply By: <%= new Date(job.applyBy).toLocaleDateString() %>
+          </h4>
+
+          <% if (User) { %>
+          <div class="actions mt-3">
+            <a href="/job/<%= job._id %>/edit" class="btn btn-primary"
+              >Update Job Details</a
+            >
+            <form
+              action="/job/<%= job._id %>/delete"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-danger">Delete Job</button>
+            </form>
+          </div>
+          <% } %>
+          <br />
+          <button
+            class="btn btn-sm btn-outline-success"
+            data-bs-toggle="modal"
+            data-bs-target="#submitjobdetails"
+          >
+            Apply Now
+          </button>
+          <!-- <a href="/jobs" class="btn btn-sm btn-outline-success"><h4>Apply Now</h4></a>          -->
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="submitjobdetails"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="submitjobdetailsLable"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1
+              class="modal-title fs-5 text-black text-center"
+              id="submitjobdetailsLable"
+            >
+              Apply Job
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <h4 style="color: #181642" class="text-center mb-3">
+              apply in less than 1 minute
+            </h4>
+            <form action="/apply" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="jobId" value="<%= job._id %>">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Name</span>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  placeholder="enter your name"
+                  aria-label="Name"
+                  aria-describedby="basic-addon1"
+                  required
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="enter your email"
+                  aria-label="Email"
+                  aria-describedby="basic-addon1"
+                  required
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Contact</span>
+                <input
+                  type="tel"
+                  name="contact"
+                  class="form-control"
+                  placeholder="+91---- ---- --"
+                  aria-label="Password"
+                  aria-describedby="basic-addon1"
+                  required
+                />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Resume</span>
+                <input
+                  type="file"
+                  name="resume"
+                  class="form-control"
+                  placeholder=""
+                  aria-label="Password"
+                  aria-describedby="basic-addon1"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-md mt-2 lbtn btn-outline-success text-center"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
