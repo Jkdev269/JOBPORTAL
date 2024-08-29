@@ -7,6 +7,7 @@ const userRoutes = require('./routes/users');
 const bodyParser = require('body-parser')
 
 const MongoStore = require('connect-mongo');
+const PORT =3000;
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
@@ -24,6 +25,6 @@ app.use('/', userRoutes);
 app.use(express.static('public'))
 app.use('/uploads', express.static('uploads'));
 app.set('view engine','ejs')
-app.listen(10000,'0.0.0.0',()=>{
+app.listen(PORT,'0.0.0.0',()=>{
     console.log('sever is starting jk');
 })
