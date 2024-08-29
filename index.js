@@ -6,7 +6,7 @@ const mongoose=require('mongoose')
 const userRoutes = require('./routes/users');
 const bodyParser = require('body-parser')
 
-// const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
@@ -17,7 +17,7 @@ app.use(session({
     secret:process.env.SESSION_SECRET,
     resave:false,
     saveUninitialized: true,
-    // store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: { secure: false } 
 }))
 app.use('/', userRoutes);
